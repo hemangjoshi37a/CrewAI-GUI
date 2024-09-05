@@ -2,9 +2,9 @@
 
 import json
 from PySide6.QtWidgets import QFileDialog
-from Node import Node
-from Edge import Edge
-from NodeData import NodeData
+from src.Node import Node
+from src.Edge import Edge
+from src.NodeData import NodeData
 
 def save(scene):
     filename, _ = QFileDialog.getSaveFileName(None, "Save File", "", "JSON Files (*.json)")
