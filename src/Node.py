@@ -7,6 +7,13 @@ from Edge import Edge
 from NodeData import NodeData
 from NodeLayout import NodeLayout
 
+from PySide6.QtWidgets import QGraphicsItem
+from PySide6.QtCore import QRectF, Qt, QPointF
+from PySide6.QtGui import QPainter, QPen, QBrush
+from .Edge import Edge
+from .NodeData import NodeData
+from .NodeLayout import NodeLayout
+
 class Node(QGraphicsItem):
     def __init__(self, node_data: NodeData):
         super().__init__()
@@ -18,12 +25,18 @@ class Node(QGraphicsItem):
         self.resizeHandleSize = 10
         self.resizing = False
         self.resizeDirection = None
-        self.content = NodeLayout(self)
+        
+        # Only create NodeLayout if we're in a proper Qt environment
+        if QApplication.instance():
+            self.content = NodeLayout(self)
+        else:
+            self.content = None
+        
         self.input_port = Port(self, QPointF(0, 25), "input")
         self.output_port = Port(self, QPointF(self.rect.width(), 25), "output")
-        self.setPos(self.data.pos_x, self.data.pos_y)  # Set initial position from NodeData
+        self.setPos(self.data.pos_x, self.data.pos_y)
         self.setAcceptHoverEvents(True)
-        self.hovered = False  # Track hover state
+        self.hovered = False
 
     def setWidth(self, width):
         self.rect.setWidth(width)
