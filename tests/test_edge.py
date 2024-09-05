@@ -38,8 +38,14 @@ def test_edge_remove(mock_nodes):
     source_node, dest_node = mock_nodes
     edge = Edge(source_node.output_port)
     edge.set_destination(dest_node.input_port)
+    
+    # Create a mock scene
+    mock_scene = MagicMock()
+    edge.setScene(mock_scene)
+    
     edge.remove()
     assert edge not in source_node.output_port.edges
     assert edge not in dest_node.input_port.edges
     assert dest_node.data.uniq_id not in source_node.data.nexts
     assert source_node.data.uniq_id not in dest_node.data.prevs
+    mock_scene.removeItem.assert_called_once_with(edge)

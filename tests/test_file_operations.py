@@ -21,6 +21,7 @@ def test_save(mock_scene):
     node_data = NodeData(type="Agent", name="TestAgent", uniq_id="test_id")
     node = Node(node_data)
     mock_scene.addItem(node)
+    mock_scene.items = MagicMock(return_value=[node])
 
     mock_file = mock_open()
     with patch('builtins.open', mock_file):
