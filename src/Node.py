@@ -7,12 +7,12 @@ from Edge import Edge
 from NodeData import NodeData
 from NodeLayout import NodeLayout
 
-from PySide6.QtWidgets import QGraphicsItem
+from PySide6.QtWidgets import QGraphicsItem, QApplication
 from PySide6.QtCore import QRectF, Qt, QPointF
 from PySide6.QtGui import QPainter, QPen, QBrush
 from Edge import Edge
-from .NodeData import NodeData
-from .NodeLayout import NodeLayout
+from NodeData import NodeData
+from NodeLayout import NodeLayout
 
 class Node(QGraphicsItem):
     def __init__(self, node_data: NodeData):
